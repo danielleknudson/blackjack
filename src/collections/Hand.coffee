@@ -16,6 +16,8 @@ class window.Hand extends Backbone.Collection
     console.log("is dealer: " + @isDealer)
     console.log(@scores())
 
+
+
     # check dealer's hand
     if @isDealer
       @array[0].flip()
@@ -29,7 +31,8 @@ class window.Hand extends Backbone.Collection
           # player won
         # else
           # dealer wins
-    @trigger 'finished'
+          #
+    @trigger 'finished', @
 
   hasAce: -> @reduce (memo, card) ->
     memo or card.get('value') is 1

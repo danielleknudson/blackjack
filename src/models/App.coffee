@@ -5,7 +5,10 @@ class window.App extends Backbone.Model
     @set 'deck', deck = new Deck()
     @set 'playerHand', deck.dealPlayer()
     @set 'dealerHand', deck.dealDealer()
-    @on 'finished', @gameOver, @
+    @get 'dealerHand'
+    .on 'finished', @gameOver, @
 
   gameOver: ->
-    @get 'playerHand'
+    console.log("asdf")
+    console.log('playerHand: ', @get 'playerHand')
+

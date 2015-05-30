@@ -10,6 +10,8 @@ class window.AppView extends Backbone.View
     'click .stand-button': -> @model.get('dealerHand').stand()
 
   initialize: ->
+    @on 'finished' ->
+      console.log('asdf');
     @render()
 
   render: ->
