@@ -5,7 +5,7 @@ class window.Hand extends Backbone.Collection
 
   hit: ->
     @add(@deck.pop())
-    if @scores()[0] > 21
+    if @scores() > 21 and not @isDealer
       @trigger 'finished', @
 
   #build stand function
@@ -15,7 +15,7 @@ class window.Hand extends Backbone.Collection
     if @isDealer
       @array[0].flip()
       # if dealer's hand < 17
-      while @scores()[0] < 17
+      while @scores() < 17
         @hit()
 
     @trigger 'finished', @
@@ -32,9 +32,7 @@ class window.Hand extends Backbone.Collection
     # The scores are an array of potential scores.
     # Usually, that array contains one element. That is the only score.
     # when there is an ace, it offers you two scores - the original score, and score + 10.
-    [@minScore(), @minScore() + 10 * @hasAce()]
+    scoreArray = [@minScore(), @minScore() + 10 * @hasAce()]
 
-  newHand: ->
-    console.log('newHand event listener worked')
-
+    if scoreArray[1] <= 21 then return scoreArray[1] else return scoreArray[0]
 

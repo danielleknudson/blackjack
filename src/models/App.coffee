@@ -14,19 +14,23 @@ class window.App extends Backbone.Model
   gameOver: ->
     playerScore =
       @get 'playerHand'
-      .scores()[0]
+      .scores()
 
     dealerScore =
       @get 'dealerHand'
-      .scores()[0]
+      .scores()
 
-    if playerScore > dealerScore and playerScore <= 21
-      alert("You won!")
-    else if dealerScore > playerScore and dealerScore <= 21 || playerScore > 21
+    if playerScore > 21
       alert("You lost!")
-    else if dealerScore == playerScore and dealerScore <= 21 and playerScore <= 21
-      alert("Draw")
-
+    else if dealerScore > 21
+      alert("You won!")
+    else if playerScore > dealerScore
+      alert("You won!")
+    else if playerScore == dealerScore
+      ("Draw")
+    else
+      alert("You lost")
+    #debugger
     if confirm "Would you like to play again?"
       @trigger 'restartGame', @
     else
