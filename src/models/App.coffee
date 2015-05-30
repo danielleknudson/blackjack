@@ -6,9 +6,29 @@ class window.App extends Backbone.Model
     @set 'playerHand', deck.dealPlayer()
     @set 'dealerHand', deck.dealDealer()
     @get 'dealerHand'
-    .on 'finished', @gameOver, @
+    .on 'finished', @checkWinner, @
 
-  gameOver: ->
-    console.log("asdf")
-    console.log('playerHand: ', @get 'playerHand')
+  checkWinner: ->
+    # if player hand is greater than dealers
+
+    playerScore =
+      @get 'playerHand'
+      .scores()[0]
+
+    dealerScore =
+      @get 'dealerHand'
+      .scores()[0]
+
+    if playerScore > dealerScore
+      alert("You won!")
+    else if dealerScore > playerScore
+      alert("You lost!")
+    else if dealerScore == playerScore
+      alert("Draw")
+
+      # player won
+    # else
+      # dealer wins
+      #
+
 
