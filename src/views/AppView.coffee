@@ -10,13 +10,14 @@ class window.AppView extends Backbone.View
     'click .stand-button': -> @model.get('dealerHand').stand()
 
   initialize: ->
-    @on 'finished' ->
-      console.log('asdf');
     @render()
+    @model.on 'playAgain', @render, @
 
   render: ->
+    console.log("rendering")
+    console.log(@model.get 'playerHand')
     @$el.children().detach()
     @$el.html @template()
-    @$('.player-hand-container').html new HandView(collection: @model.get 'playerHand').el
-    @$('.dealer-hand-container').html new HandView(collection: @model.get 'dealerHand').el
+    @$('.player-hand-container').html new HandView(collection: @model.get 'playerHand').$el
+    @$('.dealer-hand-container').html new HandView(collection: @model.get 'dealerHand').$el
 

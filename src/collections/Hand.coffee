@@ -6,15 +6,10 @@ class window.Hand extends Backbone.Collection
   hit: ->
     @add(@deck.pop())
     if @scores()[0] > 21
-      alert("Game OVER")
-    console.log(@scores())
-      #game over... this means we do something... like clear score and reset deck
-
+      @trigger 'finished', @
 
   #build stand function
   stand: ->
-    console.log("is dealer: " + @isDealer)
-    console.log(@scores())
 
     # check dealer's hand
     if @isDealer
@@ -22,7 +17,6 @@ class window.Hand extends Backbone.Collection
       # if dealer's hand < 17
       while @scores()[0] < 17
         @hit()
-        console.log(@scores()[0])
 
     @trigger 'finished', @
 

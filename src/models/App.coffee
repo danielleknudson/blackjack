@@ -6,11 +6,11 @@ class window.App extends Backbone.Model
     @set 'playerHand', deck.dealPlayer()
     @set 'dealerHand', deck.dealDealer()
     @get 'dealerHand'
-    .on 'finished', @checkWinner, @
+    .on 'finished', @gameOver, @
+    @get 'playerHand'
+    .on 'finished', @gameOver, @
 
-  checkWinner: ->
-    # if player hand is greater than dealers
-
+  gameOver: ->
     playerScore =
       @get 'playerHand'
       .scores()[0]
@@ -19,16 +19,18 @@ class window.App extends Backbone.Model
       @get 'dealerHand'
       .scores()[0]
 
-    if playerScore > dealerScore
+    if playerScore > dealerScore and playerScore <= 21
       alert("You won!")
-    else if dealerScore > playerScore
+    else if dealerScore > playerScore and dealerScore <= 21 || playerScore > 21
       alert("You lost!")
-    else if dealerScore == playerScore
+    else if dealerScore == playerScore and dealerScore <= 21 and playerScore <= 21
       alert("Draw")
 
-      # player won
-    # else
-      # dealer wins
-      #
-
+    if confirm "Would you like to play again?"
+      console.log(@get 'deck'
+                  .reset() )
+      # @set 'dealerHand',
+      @trigger 'playAgain', @
+    else
+      @trigger 'dontPlayAgain', @
 
