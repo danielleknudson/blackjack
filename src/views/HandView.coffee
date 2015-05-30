@@ -5,11 +5,9 @@ class window.HandView extends Backbone.View
 
   initialize: ->
     @collection.on 'add remove change', => @render()
-    @collection.on 'playAgain', @render, @
     @render()
 
   render: ->
-    console.log("handView Render")
     @$el.children().detach()
     @$el.html @template @collection
     @$el.append @collection.map (card) ->

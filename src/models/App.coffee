@@ -9,6 +9,7 @@ class window.App extends Backbone.Model
     .on 'finished', @gameOver, @
     @get 'playerHand'
     .on 'finished', @gameOver, @
+    @on 'restartGame', @initialize, @
 
   gameOver: ->
     playerScore =
@@ -27,10 +28,7 @@ class window.App extends Backbone.Model
       alert("Draw")
 
     if confirm "Would you like to play again?"
-      console.log(@get 'deck'
-                  .reset() )
-      # @set 'dealerHand',
-      @trigger 'playAgain', @
+      @trigger 'restartGame', @
     else
       @trigger 'dontPlayAgain', @
 
