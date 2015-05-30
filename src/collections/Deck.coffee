@@ -11,3 +11,8 @@ class window.Deck extends Backbone.Collection
 
   dealDealer: -> new Hand [@pop().flip(), @pop()], @, true
 
+  # last function
+  # This function will return the last card in the deck
+  last: ->
+    # console.log(@)
+    # @models[@length - 1]
